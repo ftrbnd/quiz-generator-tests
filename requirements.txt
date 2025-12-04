@@ -1,0 +1,2 @@
+pytest==9.0.1
+git+https://github.com/ftrbnd/quiz-generator.git@feature/remove_tests
