@@ -2,7 +2,7 @@ import pytest
 from unittest.mock import patch
 import gradio as gr
 
-from src.phases.quizzes import Quiz
+from phases.quizzes import Quiz 
 
 class TestQuizShuffling:
     @pytest.fixture
@@ -11,7 +11,6 @@ class TestQuizShuffling:
     
     @pytest.fixture
     def sample_questions(self):
-        """Fixture providing sample quiz questions"""
         return [
             {
                 'question': 'The capital of France is _____.',

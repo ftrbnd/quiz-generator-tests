@@ -1,11 +1,9 @@
 import pytest
 from unittest.mock import patch, mock_open, MagicMock
-import gradio as gr
 import csv
 from io import StringIO
-import os
 
-from src.phases.quizzes import Quiz
+from phases.quizzes import Quiz 
 
 class TestQuizFileFormats:
     @pytest.fixture
@@ -100,7 +98,7 @@ class TestQuizFileFormats:
         """Test downloading quiz in PDF format"""
         quiz = setup_quiz_with_questions
         
-        with patch('src.phases.quizzes.SimpleDocTemplate') as mock_doc:
+        with patch('phases.quizzes.SimpleDocTemplate') as mock_doc:
             mock_doc_instance = MagicMock()
             mock_doc.return_value = mock_doc_instance
             
@@ -235,7 +233,7 @@ class TestQuizFileFormats:
         
         for file_format in formats:
             if file_format == "pdf":
-                with patch('src.phases.quizzes.SimpleDocTemplate'):
+                with patch('phases.quizzes.SimpleDocTemplate'):
                     filename, _ = quiz.download(file_format)
             else:
                 with patch('builtins.open', mock_open()):

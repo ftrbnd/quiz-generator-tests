@@ -2,7 +2,7 @@ import pytest
 from unittest.mock import patch
 import gradio as gr
 
-from src.phases.quizzes import Quiz
+from phases.quizzes import Quiz 
 
 class TestQuizAnalysis:
     @pytest.fixture
@@ -11,7 +11,6 @@ class TestQuizAnalysis:
     
     @pytest.fixture
     def sample_input_text(self):
-        """Fixture providing sample input text"""
         return """
         Python is a high-level programming language. Guido van Rossum created Python in 1991.
         Python is widely used for web development, data science, and artificial intelligence.
@@ -20,7 +19,6 @@ class TestQuizAnalysis:
     
     @pytest.fixture
     def mock_algorithm_outputs(self):
-        """Fixture providing mock outputs for algorithm functions"""
         return {
             'keywords': ['python', 'programming', 'language', 'development', 'data'],
             'entities': [
@@ -42,9 +40,9 @@ class TestQuizAnalysis:
         # Set empty input text
         quiz_instance.input_text = ''
         
-        with patch('src.phases.algorithms.extract_keywords_tfidf') as mock_keywords, \
-             patch('src.phases.algorithms.extract_entities_ner') as mock_entities, \
-             patch('src.phases.algorithms.extract_topics_lda') as mock_topics:
+        with patch('phases.algorithms.extract_keywords_tfidf') as mock_keywords, \
+             patch('phases.algorithms.extract_entities_ner') as mock_entities, \
+             patch('phases.algorithms.extract_topics_lda') as mock_topics:
             
             mock_keywords.return_value = []
             mock_entities.return_value = []
@@ -62,9 +60,9 @@ class TestQuizAnalysis:
         quiz_instance.input_text = sample_input_text
         quiz_instance.markdown_result = "# Original Quiz\n\n"
         
-        with patch('src.phases.algorithms.extract_keywords_tfidf') as mock_keywords, \
-             patch('src.phases.algorithms.extract_entities_ner') as mock_entities, \
-             patch('src.phases.algorithms.extract_topics_lda') as mock_topics:
+        with patch('phases.algorithms.extract_keywords_tfidf') as mock_keywords, \
+             patch('phases.algorithms.extract_entities_ner') as mock_entities, \
+             patch('phases.algorithms.extract_topics_lda') as mock_topics:
             
             mock_keywords.return_value = mock_algorithm_outputs['keywords']
             mock_entities.return_value = mock_algorithm_outputs['entities']
@@ -94,9 +92,9 @@ class TestQuizAnalysis:
         quiz_instance.input_text = sample_input_text
         quiz_instance.markdown_result = original_markdown
         
-        with patch('src.phases.algorithms.extract_keywords_tfidf') as mock_keywords, \
-             patch('src.phases.algorithms.extract_entities_ner') as mock_entities, \
-             patch('src.phases.algorithms.extract_topics_lda') as mock_topics:
+        with patch('phases.algorithms.extract_keywords_tfidf') as mock_keywords, \
+             patch('phases.algorithms.extract_entities_ner') as mock_entities, \
+             patch('phases.algorithms.extract_topics_lda') as mock_topics:
             
             mock_keywords.return_value = mock_algorithm_outputs['keywords']
             mock_entities.return_value = mock_algorithm_outputs['entities']
@@ -116,9 +114,9 @@ class TestQuizAnalysis:
         quiz_instance.input_text = sample_input_text
         quiz_instance.markdown_result = ""
         
-        with patch('src.phases.algorithms.extract_keywords_tfidf') as mock_keywords, \
-             patch('src.phases.algorithms.extract_entities_ner') as mock_entities, \
-             patch('src.phases.algorithms.extract_topics_lda') as mock_topics:
+        with patch('phases.algorithms.extract_keywords_tfidf') as mock_keywords, \
+             patch('phases.algorithms.extract_entities_ner') as mock_entities, \
+             patch('phases.algorithms.extract_topics_lda') as mock_topics:
             
             mock_keywords.return_value = mock_algorithm_outputs['keywords']
             mock_entities.return_value = []
@@ -139,9 +137,9 @@ class TestQuizAnalysis:
         quiz_instance.input_text = sample_input_text
         quiz_instance.markdown_result = ""
         
-        with patch('src.phases.algorithms.extract_keywords_tfidf') as mock_keywords, \
-             patch('src.phases.algorithms.extract_entities_ner') as mock_entities, \
-             patch('src.phases.algorithms.extract_topics_lda') as mock_topics:
+        with patch('phases.algorithms.extract_keywords_tfidf') as mock_keywords, \
+             patch('phases.algorithms.extract_entities_ner') as mock_entities, \
+             patch('phases.algorithms.extract_topics_lda') as mock_topics:
             
             mock_keywords.return_value = []
             mock_entities.return_value = mock_algorithm_outputs['entities']
@@ -160,9 +158,9 @@ class TestQuizAnalysis:
         quiz_instance.input_text = sample_input_text
         quiz_instance.markdown_result = ""
         
-        with patch('src.phases.algorithms.extract_keywords_tfidf') as mock_keywords, \
-             patch('src.phases.algorithms.extract_entities_ner') as mock_entities, \
-             patch('src.phases.algorithms.extract_topics_lda') as mock_topics:
+        with patch('phases.algorithms.extract_keywords_tfidf') as mock_keywords, \
+             patch('phases.algorithms.extract_entities_ner') as mock_entities, \
+             patch('phases.algorithms.extract_topics_lda') as mock_topics:
             
             mock_keywords.return_value = []
             mock_entities.return_value = []
@@ -185,9 +183,9 @@ class TestQuizAnalysis:
         quiz_instance.input_text = sample_input_text
         quiz_instance.markdown_result = ""
         
-        with patch('src.phases.algorithms.extract_keywords_tfidf') as mock_keywords, \
-             patch('src.phases.algorithms.extract_entities_ner') as mock_entities, \
-             patch('src.phases.algorithms.extract_topics_lda') as mock_topics:
+        with patch('phases.algorithms.extract_keywords_tfidf') as mock_keywords, \
+             patch('phases.algorithms.extract_entities_ner') as mock_entities, \
+             patch('phases.algorithms.extract_topics_lda') as mock_topics:
             
             mock_keywords.return_value = mock_algorithm_outputs['keywords']
             mock_entities.return_value = []  # Empty entities
@@ -207,9 +205,9 @@ class TestQuizAnalysis:
         quiz_instance.input_text = sample_input_text
         quiz_instance.markdown_result = ""
         
-        with patch('src.phases.algorithms.extract_keywords_tfidf') as mock_keywords, \
-             patch('src.phases.algorithms.extract_entities_ner') as mock_entities, \
-             patch('src.phases.algorithms.extract_topics_lda') as mock_topics:
+        with patch('phases.algorithms.extract_keywords_tfidf') as mock_keywords, \
+             patch('phases.algorithms.extract_entities_ner') as mock_entities, \
+             patch('phases.algorithms.extract_topics_lda') as mock_topics:
             
             mock_keywords.return_value = mock_algorithm_outputs['keywords']
             mock_entities.return_value = mock_algorithm_outputs['entities']
@@ -235,9 +233,9 @@ class TestQuizAnalysis:
             for i in range(15)
         ]
         
-        with patch('src.phases.algorithms.extract_keywords_tfidf') as mock_keywords, \
-             patch('src.phases.algorithms.extract_entities_ner') as mock_entities, \
-             patch('src.phases.algorithms.extract_topics_lda') as mock_topics:
+        with patch('phases.algorithms.extract_keywords_tfidf') as mock_keywords, \
+             patch('phases.algorithms.extract_entities_ner') as mock_entities, \
+             patch('phases.algorithms.extract_topics_lda') as mock_topics:
             
             mock_keywords.return_value = []
             mock_entities.return_value = many_entities
@@ -260,9 +258,9 @@ class TestQuizAnalysis:
             ['word1', 'word2', 'word3', 'word4', 'word5', 'word6', 'word7', 'word8']
         ]
         
-        with patch('src.phases.algorithms.extract_keywords_tfidf') as mock_keywords, \
-             patch('src.phases.algorithms.extract_entities_ner') as mock_entities, \
-             patch('src.phases.algorithms.extract_topics_lda') as mock_topics:
+        with patch('phases.algorithms.extract_keywords_tfidf') as mock_keywords, \
+             patch('phases.algorithms.extract_entities_ner') as mock_entities, \
+             patch('phases.algorithms.extract_topics_lda') as mock_topics:
             
             mock_keywords.return_value = []
             mock_entities.return_value = []
@@ -283,9 +281,9 @@ class TestQuizAnalysis:
         quiz_instance.input_text = sample_input_text
         quiz_instance.markdown_result = ""
         
-        with patch('src.phases.algorithms.extract_keywords_tfidf') as mock_keywords, \
-             patch('src.phases.algorithms.extract_entities_ner') as mock_entities, \
-             patch('src.phases.algorithms.extract_topics_lda') as mock_topics:
+        with patch('phases.algorithms.extract_keywords_tfidf') as mock_keywords, \
+             patch('phases.algorithms.extract_entities_ner') as mock_entities, \
+             patch('phases.algorithms.extract_topics_lda') as mock_topics:
             
             mock_keywords.return_value = []
             mock_entities.return_value = []
@@ -303,9 +301,9 @@ class TestQuizAnalysis:
         quiz_instance.input_text = sample_input_text
         quiz_instance.markdown_result = "# Quiz\n\n"
         
-        with patch('src.phases.algorithms.extract_keywords_tfidf') as mock_keywords, \
-             patch('src.phases.algorithms.extract_entities_ner') as mock_entities, \
-             patch('src.phases.algorithms.extract_topics_lda') as mock_topics:
+        with patch('phases.algorithms.extract_keywords_tfidf') as mock_keywords, \
+             patch('phases.algorithms.extract_entities_ner') as mock_entities, \
+             patch('phases.algorithms.extract_topics_lda') as mock_topics:
             
             mock_keywords.return_value = mock_algorithm_outputs['keywords']
             mock_entities.return_value = mock_algorithm_outputs['entities']
@@ -331,9 +329,9 @@ class TestQuizAnalysis:
         quiz_instance.input_text = sample_input_text
         quiz_instance.markdown_result = "# Quiz\n\n"
         
-        with patch('src.phases.algorithms.extract_keywords_tfidf') as mock_keywords, \
-             patch('src.phases.algorithms.extract_entities_ner') as mock_entities, \
-             patch('src.phases.algorithms.extract_topics_lda') as mock_topics:
+        with patch('phases.algorithms.extract_keywords_tfidf') as mock_keywords, \
+             patch('phases.algorithms.extract_entities_ner') as mock_entities, \
+             patch('phases.algorithms.extract_topics_lda') as mock_topics:
             
             mock_keywords.return_value = mock_algorithm_outputs['keywords']
             mock_entities.return_value = mock_algorithm_outputs['entities']

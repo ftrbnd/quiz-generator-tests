@@ -2,17 +2,15 @@ import pytest
 from unittest.mock import patch
 import gradio as gr
 
-from src.phases.quizzes import Quiz  # Adjust import path as needed
+from phases.quizzes import Quiz 
 
 class TestInputValidation:
     @pytest.fixture
     def quiz_instance(self):
-        """Fixture providing a fresh Quiz instance for each test"""
         return Quiz()
     
     @pytest.fixture
     def sample_input_text(self):
-        """Fixture providing sample input text"""
         return """
         Python is a high-level programming language. Guido van Rossum created Python in 1991.
         Python is widely used for web development, data science, and artificial intelligence.
@@ -62,7 +60,7 @@ class TestInputValidation:
     
     def test_generate_returns_correct_output_format(self, quiz_instance, sample_input_text, sample_generated_questions):
         """Test that generate_from_text returns the correct tuple format"""
-        with patch('src.phases.quizzes.q_types.generate_fill_blank_questions') as mock_generate:
+        with patch('phases.quizzes.q_types.generate_fill_blank_questions') as mock_generate:
             mock_generate.return_value = sample_generated_questions
             
             result = quiz_instance.generate_from_text(sample_input_text, 3, ['fill_blank'])
@@ -85,7 +83,7 @@ class TestInputValidation:
     
     def test_generate_stores_input_text(self, quiz_instance, sample_input_text, sample_generated_questions):
         """Test that generate_from_text stores the input text in instance variable"""
-        with patch('src.phases.quizzes.q_types.generate_fill_blank_questions') as mock_generate:
+        with patch('phases.quizzes.q_types.generate_fill_blank_questions') as mock_generate:
             mock_generate.return_value = sample_generated_questions
             
             quiz_instance.generate_from_text(sample_input_text, 3, ['fill_blank'])
@@ -98,7 +96,7 @@ class TestInputValidation:
         num_questions = 3
         question_types = ['fill_blank']
         
-        with patch('src.phases.quizzes.q_types.generate_fill_blank_questions') as mock_generate:
+        with patch('phases.quizzes.q_types.generate_fill_blank_questions') as mock_generate:
             mock_generate.return_value = sample_generated_questions
             
             quiz_instance.generate_from_text(sample_input_text, num_questions, question_types)
@@ -118,7 +116,7 @@ class TestInputValidation:
         ]
         
         for input_text, num_questions in test_cases:
-            with patch('src.phases.quizzes.q_types.generate_fill_blank_questions') as mock_generate:
+            with patch('phases.quizzes.q_types.generate_fill_blank_questions') as mock_generate:
                 mock_generate.return_value = [{'question': 'Q', 'answer': 'A', 'type': 'fill_blank'}]
                 
                 result = quiz_instance.generate_from_text(input_text, num_questions, ['fill_blank'])
@@ -134,7 +132,7 @@ class TestInputValidation:
         String formatting: f"{variable}" or "{}".format(value)
         """
         
-        with patch('src.phases.quizzes.q_types.generate_fill_blank_questions') as mock_generate:
+        with patch('phases.quizzes.q_types.generate_fill_blank_questions') as mock_generate:
             mock_generate.return_value = [
                 {'question': 'Test _____ question?', 'answer': 'special', 'type': 'fill_blank'}
             ]
@@ -153,7 +151,7 @@ class TestInputValidation:
         Mathematical symbols: α, β, γ, ∞, ∑, ∫
         """
         
-        with patch('src.phases.quizzes.q_types.generate_fill_blank_questions') as mock_generate:
+        with patch('phases.quizzes.q_types.generate_fill_blank_questions') as mock_generate:
             mock_generate.return_value = [
                 {'question': 'Unicode _____ test', 'answer': 'characters', 'type': 'fill_blank'}
             ]
@@ -175,7 +173,7 @@ class TestInputValidation:
         Fourth paragraph covering testing and best practices.
         """
         
-        with patch('src.phases.quizzes.q_types.generate_fill_blank_questions') as mock_generate:
+        with patch('phases.quizzes.q_types.generate_fill_blank_questions') as mock_generate:
             mock_generate.return_value = [
                 {'question': 'Test _____?', 'answer': 'question', 'type': 'fill_blank'}
             ]
@@ -189,7 +187,7 @@ class TestInputValidation:
         """Test that input text formatting is preserved in storage"""
         formatted_text = "Line 1\n\tIndented line\n  Spaces\nLine 4"
         
-        with patch('src.phases.quizzes.q_types.generate_fill_blank_questions') as mock_generate:
+        with patch('phases.quizzes.q_types.generate_fill_blank_questions') as mock_generate:
             mock_generate.return_value = []
             
             quiz_instance.generate_from_text(formatted_text, 1, ['fill_blank'])
