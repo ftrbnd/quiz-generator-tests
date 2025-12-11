@@ -7,9 +7,9 @@
 | ID  | User Story                                                                                                                                             | Implementation                                                   |
 | --- | ------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------- |
 | 2   | As a student, I want to upload my notes so that I can be quizzed on the subject matter                                                                 | [input_test.py](preprocessing/input_test.py)                     |
-| 12  | As an instructor, I want to be able to specify the question types so that students demonstrate their knowledge in different ways                       | [input_test.py](preprocessing/input_test.py)                     |
+| 12  | As an instructor, I want to be able to specify the question types so that students demonstrate their knowledge in different ways                       | [questtype_test.py](preprocessing/questtype_test.py)                     |
 | 13  | As a student, I want to set the difficulty level so that I can slowly improve my knowledge                                                             | [test_story_13.py](preprocessing/test_story_13.py)               |
-| 16  | As a professor, I want to upload my materials in whatever file format I have (PDF, text, images) so that the system can create quizzes from any source | [file_upload_test.py](preprocessing/file_upload_test.py)         |
+| 16  | As a professor, I want to upload my materials in whatever file format I have (PDF, text, images) so that the system can create quizzes from any source | [anyfile_test.py](preprocessing/anyfile_test.py)         |
 | 65  | As a student, I want the system to automatically clean and structure my uploaded content so that irrelevant text doesn't interfere with the generation | [clean_stopwords_test.py](preprocessing/clean_stopwords_test.py) |
 
 ## Creating Questions
