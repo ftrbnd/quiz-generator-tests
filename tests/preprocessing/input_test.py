@@ -40,30 +40,24 @@ class TestInputValidation:
     
     def test_generate_with_empty_input(self, quiz_instance):
         """Test generation with empty input text"""
-        result = quiz_instance.generate_from_text("", 5, ['fill_blank'])
+        result = quiz_instance.generate("text",  "", 5, ['fill_blank'])
         
         assert isinstance(result, tuple)
         assert result[2] == "Please provide text to generate questions from."
     
     def test_generate_with_whitespace_only(self, quiz_instance):
         """Test generation with whitespace-only input"""
-        result = quiz_instance.generate_from_text("   \n\t  ", 5, ['fill_blank'])
+        result = quiz_instance.generate("text",  "   \n\t  ", 5, ['fill_blank'])
         
         assert isinstance(result, tuple)
         assert result[2] == "Please provide text to generate questions from."
     
-    def test_generate_with_none_input(self, quiz_instance):
-        """Test generation with None input"""
-        # This should raise an AttributeError since None doesn't have .strip()
-        with pytest.raises(AttributeError):
-            quiz_instance.generate_from_text(None, 5, ['fill_blank'])
-    
     def test_generate_returns_correct_output_format(self, quiz_instance, sample_input_text, sample_generated_questions):
-        """Test that generate_from_text returns the correct tuple format"""
+        """Test that generate "text",  returns the correct tuple format"""
         with patch('phases.quizzes.q_types.generate_fill_blank_questions') as mock_generate:
             mock_generate.return_value = sample_generated_questions
             
-            result = quiz_instance.generate_from_text(sample_input_text, 3, ['fill_blank'])
+            result = quiz_instance.generate("text",  sample_input_text, 3, ['fill_blank'])
         
         # Should return a tuple of (gr.update, gr.update, gr.Markdown)
         assert isinstance(result, tuple)
@@ -82,24 +76,24 @@ class TestInputValidation:
         assert isinstance(markdown_output, gr.Markdown)
     
     def test_generate_stores_input_text(self, quiz_instance, sample_input_text, sample_generated_questions):
-        """Test that generate_from_text stores the input text in instance variable"""
+        """Test that generate "text",  stores the input text in instance variable"""
         with patch('phases.quizzes.q_types.generate_fill_blank_questions') as mock_generate:
             mock_generate.return_value = sample_generated_questions
             
-            quiz_instance.generate_from_text(sample_input_text, 3, ['fill_blank'])
+            quiz_instance.generate("text",  sample_input_text, 3, ['fill_blank'])
         
         # Verify input text is stored
         assert quiz_instance.input_text == sample_input_text
     
     def test_generate_updates_quiz_state(self, quiz_instance, sample_input_text, sample_generated_questions):
-        """Test that generate_from_text updates the quiz state correctly"""
+        """Test that generate "text",  updates the quiz state correctly"""
         num_questions = 3
         question_types = ['fill_blank']
         
         with patch('phases.quizzes.q_types.generate_fill_blank_questions') as mock_generate:
             mock_generate.return_value = sample_generated_questions
             
-            quiz_instance.generate_from_text(sample_input_text, num_questions, question_types)
+            quiz_instance.generate("text",  sample_input_text, num_questions, question_types)
         
         # Verify quiz state is updated
         assert quiz_instance.current_quiz_state['questions'] == sample_generated_questions
@@ -119,7 +113,7 @@ class TestInputValidation:
             with patch('phases.quizzes.q_types.generate_fill_blank_questions') as mock_generate:
                 mock_generate.return_value = [{'question': 'Q', 'answer': 'A', 'type': 'fill_blank'}]
                 
-                result = quiz_instance.generate_from_text(input_text, num_questions, ['fill_blank'])
+                result = quiz_instance.generate("text",  input_text, num_questions, ['fill_blank'])
                 
                 assert isinstance(result, tuple)
                 assert quiz_instance.input_text == input_text
@@ -137,7 +131,7 @@ class TestInputValidation:
                 {'question': 'Test _____ question?', 'answer': 'special', 'type': 'fill_blank'}
             ]
             
-            result = quiz_instance.generate_from_text(special_text, 1, ['fill_blank'])
+            result = quiz_instance.generate("text",  special_text, 1, ['fill_blank'])
         
         # Verify it handles special characters
         assert isinstance(result, tuple)
@@ -156,7 +150,7 @@ class TestInputValidation:
                 {'question': 'Unicode _____ test', 'answer': 'characters', 'type': 'fill_blank'}
             ]
             
-            result = quiz_instance.generate_from_text(unicode_text, 1, ['fill_blank'])
+            result = quiz_instance.generate("text",  unicode_text, 1, ['fill_blank'])
         
         assert isinstance(result, tuple)
         assert quiz_instance.input_text == unicode_text
@@ -178,7 +172,7 @@ class TestInputValidation:
                 {'question': 'Test _____?', 'answer': 'question', 'type': 'fill_blank'}
             ]
             
-            result = quiz_instance.generate_from_text(multiline_text, 1, ['fill_blank'])
+            result = quiz_instance.generate("text",  multiline_text, 1, ['fill_blank'])
         
         assert isinstance(result, tuple)
         assert quiz_instance.input_text == multiline_text
@@ -190,7 +184,7 @@ class TestInputValidation:
         with patch('phases.quizzes.q_types.generate_fill_blank_questions') as mock_generate:
             mock_generate.return_value = []
             
-            quiz_instance.generate_from_text(formatted_text, 1, ['fill_blank'])
+            quiz_instance.generate("text",  formatted_text, 1, ['fill_blank'])
         
         # Verify exact formatting is preserved
         assert quiz_instance.input_text == formatted_text

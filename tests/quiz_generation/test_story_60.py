@@ -1,5 +1,4 @@
-import pytest
-from quiz_generator import shuffle_answers
+from terminal.shuffle import shuffle_answers
 
 def test_shuffle_answers_preserves_correct_answer():
     question = {
