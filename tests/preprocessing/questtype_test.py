@@ -33,7 +33,7 @@ def test_generate_from_text_sets_question_types_in_state():
     input_text = "Photosynthesis is the process by which plants convert light energy into chemical energy."
     question_types = ["multiple_choice", "short_answer", "fill_blank"]
 
-    quiz.generate_from_text(input_text, num_questions=3, question_types=question_types)
+    quiz.generate("text", input_text, num_questions=3, question_types=question_types)
 
     assert quiz.current_quiz_state["question_types"] == question_types
 
@@ -47,7 +47,7 @@ def test_shuffle_does_not_change_question_types():
     input_text = "The mitochondria is the powerhouse of the cell."
     question_types = ["fill_blank"] 
 
-    quiz.generate_from_text(
+    quiz.generate("text", 
         input=input_text,
         num_questions=3,
         question_types=question_types,
@@ -67,7 +67,7 @@ def test_generate_from_text_overwrites_previous_question_types():
     quiz = Quiz()
 
     
-    quiz.generate_from_text(
+    quiz.generate("text", 
         input="First topic text",
         num_questions=2,
         question_types=["multiple_choice"],
@@ -75,13 +75,13 @@ def test_generate_from_text_overwrites_previous_question_types():
     first_types = list(quiz.current_quiz_state["question_types"])
 
     
-    quiz.generate_from_text(
+    quiz.generate("text", 
         input="Second topic text",
         num_questions=2,
         question_types=["short_answer"],
     )
     second_types = list(quiz.current_quiz_state["question_types"])
-    quiz.generate_from_text(
+    quiz.generate("text", 
         input="Third topic text",
         num_questions=2,
         question_types=["fill_blank"],
